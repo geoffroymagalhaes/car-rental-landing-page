@@ -1,5 +1,9 @@
+import "./Form.css";
 import { useState } from "react";
 import axios from "axios";
+
+import FormQuestion from "../../FormQuestion/FormQuestion";
+import FormAnswer from "../../FormAnswer/FormAnswer";
 
 const Form = () => {
   const [typeOfCar, setTypeOfCar] = useState("");
@@ -12,6 +16,7 @@ const Form = () => {
   const [phone, setPhone] = useState("");
   const [showmodal, setShowModal] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  console.log(typeOfCar);
 
   const handleSubmit = async () => {
     try {
@@ -38,6 +43,22 @@ const Form = () => {
       console.log(error);
     }
   };
-  return <main></main>;
+  return (
+    <section className="form">
+      <FormQuestion
+        question={
+          <>
+            <span>Quel est le type de modèle que vous</span>
+            <br />
+            <span>souhaitez tester ?</span>
+          </>
+        }
+      />
+      <FormAnswer setTypeOfCar={setTypeOfCar} answer="COMPACTE" />
+      <FormAnswer setTypeOfCar={setTypeOfCar} answer="SUV" />
+      <FormAnswer setTypeOfCar={setTypeOfCar} answer="ELECTRIQUE & HYBRIDE" />
+      <FormAnswer setTypeOfCar={setTypeOfCar} answer="SPORTIVE" />
+    </section>
+  );
 };
 export default Form;

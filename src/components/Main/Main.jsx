@@ -1,4 +1,6 @@
 import "./Main.css";
+import Form from "../Form/Form";
+
 const Main = () => {
   return (
     <main>
@@ -12,6 +14,7 @@ const Main = () => {
           <br />
           connaissance avec l'univers Alfa Romeo.
         </p>
+        <Form />
       </div>
     </main>
   );

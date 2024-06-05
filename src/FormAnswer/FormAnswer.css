@@ -1,0 +1,14 @@
+.answer {
+  background-color: #1b202a;
+  font-size: 12px;
+  font-weight: 300;
+  padding: 13px 0 13px 25px;
+  border-radius: 20px;
+  margin-top: 20px;
+  width: 65%;
+  transition: background-color 0.3s ease, cursor 0.3s ease;
+}
+.answer:hover {
+  background-color: #a91f29;
+  cursor: pointer;
+}
