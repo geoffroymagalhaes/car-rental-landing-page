@@ -1,0 +1,14 @@
+.bookingtext {
+  padding: 90px 0 90px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.underline {
+  text-decoration: underline;
+}
+.thanks {
+  display: flex;
+  justify-content: end;
+}

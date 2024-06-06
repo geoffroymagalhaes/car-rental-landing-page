@@ -6,6 +6,7 @@ import FormQuestion from "../../FormQuestion/FormQuestion";
 import FormAnswer from "../../FormAnswer/FormAnswer";
 import ContactDetails from "../ContactDetails/ContactDetails";
 import Modal from "../../Modal/Modal";
+import SubmittedText from "../SubmittedText/SubmittedText";
 
 const Form = () => {
   const [typeOfCar, setTypeOfCar] = useState("");
@@ -21,6 +22,7 @@ const Form = () => {
   console.log(leasingDuration);
   console.log(firstname);
   console.log(showmodal);
+  console.log(phone);
   console.log(city);
 
   const handleSubmit = async () => {
@@ -106,8 +108,8 @@ const Form = () => {
           </>
         </>
       )}
-      {((buyOrLease === "UN ACHAT" && newOrUsed) ||
-        (buyOrLease === "UN LEASING" && leasingDuration)) && (
+      {((buyOrLease === "UN ACHAT" && newOrUsed && !submitted) ||
+        (buyOrLease === "UN LEASING" && leasingDuration && !submitted)) && (
         <>
           <FormQuestion question="Vos coordonnées :" />
           <ContactDetails
@@ -124,12 +126,14 @@ const Form = () => {
         createPortal(
           <Modal
             city={city}
+            handleSubmit={handleSubmit}
             closeModal={() => {
               setShowModal(false);
             }}
           />,
           document.body
         )}
+      {submitted && <SubmittedText />}
     </section>
   );
 };
