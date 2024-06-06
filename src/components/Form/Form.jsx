@@ -7,7 +7,7 @@ import FormAnswer from "../../FormAnswer/FormAnswer";
 
 const Form = () => {
   const [typeOfCar, setTypeOfCar] = useState("");
-  const [buyOrLease, setBuyOrLeas] = useState("");
+  const [buyOrLease, setBuyOrLease] = useState("");
   const [newOrUsed, setNewOrUsed] = useState("");
   const [leasingDuration, setLeasingDuration] = useState("");
   const [lastname, setLastname] = useState("");
@@ -45,19 +45,56 @@ const Form = () => {
   };
   return (
     <section className="form">
-      <FormQuestion
-        question={
+      {!typeOfCar && (
+        <>
+          <FormQuestion
+            question={
+              <>
+                <span>Quel est le type de modèle que vous</span>
+                <br />
+                <span>souhaitez tester ?</span>
+              </>
+            }
+          />
+          <FormAnswer setAnswers={setTypeOfCar} answer="COMPACTE" />
+          <FormAnswer setAnswers={setTypeOfCar} answer="SUV" />
+          <FormAnswer setAnswers={setTypeOfCar} answer="ELECTRIQUE & HYBRIDE" />
+          <FormAnswer setAnswers={setTypeOfCar} answer="SPORTIVE" />
+        </>
+      )}
+      {typeOfCar && !buyOrLease && (
+        <>
+          <FormQuestion question="Vous êtes intéressé par ?" />
+          <FormAnswer setAnswers={setBuyOrLease} answer="UN ACHAT" />
+          <FormAnswer setAnswers={setBuyOrLease} answer="UN LEASING" />
+        </>
+      )}
+      {buyOrLease === "UN ACHAT" && !newOrUsed && (
+        <>
           <>
-            <span>Quel est le type de modèle que vous</span>
-            <br />
-            <span>souhaitez tester ?</span>
+            <FormQuestion question="Pour Quel type de véhicule ?" />
+            <FormAnswer setAnswers={setNewOrUsed} answer="NEUF" />
+            <FormAnswer setAnswers={setNewOrUsed} answer="OCCASION" />
           </>
-        }
-      />
-      <FormAnswer setTypeOfCar={setTypeOfCar} answer="COMPACTE" />
-      <FormAnswer setTypeOfCar={setTypeOfCar} answer="SUV" />
-      <FormAnswer setTypeOfCar={setTypeOfCar} answer="ELECTRIQUE & HYBRIDE" />
-      <FormAnswer setTypeOfCar={setTypeOfCar} answer="SPORTIVE" />
+        </>
+      )}
+      {buyOrLease === "UN LEASING" && !leasingDuration && (
+        <>
+          <>
+            <FormQuestion question="Pour Quelle durée ?" />
+            <FormAnswer setAnswers={setLeasingDuration} answer="6 MOIS" />
+            <FormAnswer setAnswers={setLeasingDuration} answer="12 MOIS" />
+            <FormAnswer setAnswers={setLeasingDuration} answer="18 MOIS" />
+            <FormAnswer setAnswers={setLeasingDuration} answer="24 MOIS" />
+          </>
+        </>
+      )}
+      {((buyOrLease === "UN ACHAT" && newOrUsed) ||
+        (buyOrLease === "UN LEASING" && leasingDuration)) && (
+        <>
+          <FormQuestion question="Vos coordonnées :" />
+        </>
+      )}
     </section>
   );
 };

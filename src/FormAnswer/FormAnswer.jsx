@@ -1,10 +1,10 @@
 import "./FormAnswer.css";
 
-const FormAnswer = ({ answer, setTypeOfCar }) => {
+const FormAnswer = ({ answer, setAnswers }) => {
   return (
     <p
       onClick={() => {
-        setTypeOfCar(answer);
+        setAnswers(answer);
       }}
       className="answer"
     >
