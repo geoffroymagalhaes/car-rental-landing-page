@@ -1,0 +1,51 @@
+.fullname {
+  display: flex;
+  justify-content: space-between;
+}
+.number-details {
+  display: flex;
+  gap: 40px;
+}
+label {
+  font-size: 13px;
+  display: block;
+  font-weight: 300;
+  padding-left: 15px;
+  padding-top: 20px;
+}
+
+input,
+label {
+  margin: 0.4rem 0;
+}
+
+input {
+  padding: 10px;
+  font-weight: 100;
+  color: #f4f4f4;
+  background-color: #1b202a;
+  border-radius: 20px;
+  border: none;
+}
+input::placeholder {
+  color: #f4f4f4;
+  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  padding: 3px 10px;
+}
+.flex-submit {
+  display: flex;
+  justify-content: center;
+}
+.submit {
+  margin-top: 30px;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  border-radius: 10px;
+  background-color: #a91f29;
+  padding: 12px 22px;
+}
+.submit:hover {
+  background-color: rgba(255, 0, 0, 0.81);
+  cursor: pointer;
+}

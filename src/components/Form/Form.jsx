@@ -1,9 +1,11 @@
 import "./Form.css";
 import { useState } from "react";
 import axios from "axios";
-
+import { createPortal } from "react-dom";
 import FormQuestion from "../../FormQuestion/FormQuestion";
 import FormAnswer from "../../FormAnswer/FormAnswer";
+import ContactDetails from "../ContactDetails/ContactDetails";
+import Modal from "../../Modal/Modal";
 
 const Form = () => {
   const [typeOfCar, setTypeOfCar] = useState("");
@@ -16,7 +18,10 @@ const Form = () => {
   const [phone, setPhone] = useState("");
   const [showmodal, setShowModal] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  console.log(typeOfCar);
+  console.log(leasingDuration);
+  console.log(firstname);
+  console.log(showmodal);
+  console.log(city);
 
   const handleSubmit = async () => {
     try {
@@ -82,10 +87,22 @@ const Form = () => {
         <>
           <>
             <FormQuestion question="Pour Quelle durée ?" />
-            <FormAnswer setAnswers={setLeasingDuration} answer="6 MOIS" />
-            <FormAnswer setAnswers={setLeasingDuration} answer="12 MOIS" />
-            <FormAnswer setAnswers={setLeasingDuration} answer="18 MOIS" />
-            <FormAnswer setAnswers={setLeasingDuration} answer="24 MOIS" />
+            <FormAnswer
+              setAnswers={() => setLeasingDuration("6 M")}
+              answer="6 MOIS"
+            />
+            <FormAnswer
+              setAnswers={() => setLeasingDuration("12 M")}
+              answer="12 MOIS"
+            />
+            <FormAnswer
+              setAnswers={() => setLeasingDuration("18 M")}
+              answer="18 MOIS"
+            />
+            <FormAnswer
+              setAnswers={() => setLeasingDuration("24 M")}
+              answer="24 MOIS"
+            />
           </>
         </>
       )}
@@ -93,8 +110,26 @@ const Form = () => {
         (buyOrLease === "UN LEASING" && leasingDuration)) && (
         <>
           <FormQuestion question="Vos coordonnées :" />
+          <ContactDetails
+            setLastname={setLastname}
+            setFirstname={setFirstname}
+            setCity={setCity}
+            setPhone={setPhone}
+            setShowModal={setShowModal}
+          />
         </>
       )}
+      {showmodal &&
+        !submitted &&
+        createPortal(
+          <Modal
+            city={city}
+            closeModal={() => {
+              setShowModal(false);
+            }}
+          />,
+          document.body
+        )}
     </section>
   );
 };
