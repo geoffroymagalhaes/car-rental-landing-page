@@ -1,3 +1,5 @@
+// import css sheet
+
 import "./FormQuestion.css";
 
 const FormQuestion = ({ question }) => {

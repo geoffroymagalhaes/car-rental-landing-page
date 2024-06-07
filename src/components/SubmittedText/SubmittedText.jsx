@@ -1,3 +1,4 @@
+// import css sheet
 import "./SubmittedText.css";
 
 const SubmittedText = () => {

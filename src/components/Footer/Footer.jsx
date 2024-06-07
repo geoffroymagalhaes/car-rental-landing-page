@@ -1,3 +1,4 @@
+// import css sheet
 import "./Footer.css";
 
 const Footer = () => {

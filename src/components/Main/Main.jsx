@@ -1,5 +1,8 @@
-import "./Main.css";
+// import component
 import Form from "../Form/Form";
+
+// import css sheet
+import "./Main.css";
 
 const Main = () => {
   return (
@@ -14,6 +17,7 @@ const Main = () => {
           <br />
           connaissance avec l'univers Alfa Romeo.
         </p>
+        {/* display form component */}
         <Form />
       </div>
     </main>

@@ -1,4 +1,6 @@
+// import css sheet
 import "./Modal.css";
+
 const Modal = ({ closeModal, city, handleSubmit }) => {
   return (
     <>

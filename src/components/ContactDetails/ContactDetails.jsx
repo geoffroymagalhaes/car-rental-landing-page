@@ -1,6 +1,11 @@
+// import react
 import { useState } from "react";
+
+//  import package
+import axios from "axios";
+
+// import css sheet
 import "./ContactDetails.css";
-import axios from "axios"; // Make sure to import axios
 
 const ContactDetails = ({
   setLastname,
@@ -12,18 +17,34 @@ const ContactDetails = ({
   const [zipcode, setZipcode] = useState("");
   const [error, setError] = useState("");
 
-  const handlePhoneConvertion = (e) => {
-    let formattedNumber = e.target.value.replace(/\D/g, "");
-    if (formattedNumber.length === 10) {
-      formattedNumber = `+33${formattedNumber.substring(1)}`;
-    }
-    setPhone(formattedNumber);
-  };
+  // handling phone conversion and errors
+  const handlePhoneConversion = (e) => {
+    try {
+      let formattedNumber = e.target.value.replace(/\D/g, "");
 
+      if (formattedNumber.length < 10) {
+        throw new Error("Le numéro de téléphone doit contenir 10 caractères.");
+      }
+
+      if (!formattedNumber.startsWith("0")) {
+        throw new Error("Le numéro de téléphone doit commencer par un 0.");
+      }
+
+      if (formattedNumber.length === 10 && formattedNumber.startsWith("0")) {
+        formattedNumber = `+33${formattedNumber.substring(1)}`;
+      }
+
+      setPhone(formattedNumber);
+      setError("");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  // handling of zipcode error and axios city request.
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!/^\d*$/.test(zipcode)) {
-      setError("Zipcode must be a number");
+      setError("Le code postal doit être un nombre.");
     } else if (zipcode.length < 5) {
       setError("Zipcode must be 5 digits long");
     } else {
@@ -36,11 +57,11 @@ const ContactDetails = ({
           setCity(data[0].nom);
           setShowModal(true);
         } else {
-          setError("Invalid zipcode");
+          setError("Code postal invalide");
         }
       } catch (error) {
         console.log(error);
-        setError("Failed to fetch city data");
+        setError("Échec de la récupération des données de la ville.");
       }
     }
   };
@@ -87,7 +108,6 @@ const ContactDetails = ({
             onChange={(e) => setZipcode(e.target.value)}
             required
           />
-          {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
         <div>
           <label htmlFor="phone">TELEPHONE</label>
@@ -99,10 +119,15 @@ const ContactDetails = ({
             pattern="[0-9]{10}"
             required
             size="25"
-            onChange={handlePhoneConvertion}
+            onChange={handlePhoneConversion}
           />
         </div>
       </div>
+      {error && (
+        <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>
+          {error}
+        </p>
+      )}
       <div className="flex-submit">
         <input className="submit" type="submit" value="CONTINUER" />
       </div>

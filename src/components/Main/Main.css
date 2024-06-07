@@ -17,3 +17,26 @@ main {
   line-height: 25px;
   font-weight: 100;
 }
+
+@media (max-width: 600px) {
+  main {
+    background-image: url(../../assets/img/a20ccc2b1fb41da99a7c5561cffd7885.jpeg);
+    background-position: 70%;
+    height: calc(100vh - 190px);
+
+    background-repeat: no-repeat;
+  }
+  .main-text > h1 {
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 200;
+  }
+  .main-text {
+    padding: 15px 25px 0 25px;
+  }
+  .main-text > p {
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 200;
+  }
+}

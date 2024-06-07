@@ -12,3 +12,13 @@
   display: flex;
   justify-content: end;
 }
+@media (max-width: 600px) {
+  .bookingtext {
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 25px;
+  }
+  .thanks {
+    justify-content: center;
+  }
+}

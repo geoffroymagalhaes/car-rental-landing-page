@@ -1,12 +1,19 @@
-import "./Form.css";
+// import react
 import { useState } from "react";
-import axios from "axios";
 import { createPortal } from "react-dom";
+
+// import package
+import axios from "axios";
+
+// import components
 import FormQuestion from "../../FormQuestion/FormQuestion";
 import FormAnswer from "../../FormAnswer/FormAnswer";
 import ContactDetails from "../ContactDetails/ContactDetails";
 import Modal from "../../Modal/Modal";
 import SubmittedText from "../SubmittedText/SubmittedText";
+
+// import css sheet
+import "./Form.css";
 
 const Form = () => {
   const [typeOfCar, setTypeOfCar] = useState("");
@@ -19,12 +26,8 @@ const Form = () => {
   const [phone, setPhone] = useState("");
   const [showmodal, setShowModal] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  console.log(leasingDuration);
-  console.log(firstname);
-  console.log(showmodal);
-  console.log(phone);
-  console.log(city);
 
+  // handle axios request
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
@@ -42,7 +45,6 @@ const Form = () => {
           },
         }
       );
-      //   if response good set submitted to true
       console.log(response);
       setShowModal(false);
       setSubmitted(true);
@@ -52,6 +54,7 @@ const Form = () => {
   };
   return (
     <section className="form">
+      {/* display type of car  */}
       {!typeOfCar && (
         <>
           <FormQuestion
@@ -69,6 +72,7 @@ const Form = () => {
           <FormAnswer setAnswers={setTypeOfCar} answer="SPORTIVE" />
         </>
       )}
+      {/* display interest sell options  */}
       {typeOfCar && !buyOrLease && (
         <>
           <FormQuestion question="Vous êtes intéressé par ?" />
@@ -76,6 +80,7 @@ const Form = () => {
           <FormAnswer setAnswers={setBuyOrLease} answer="UN LEASING" />
         </>
       )}
+      {/* Display if buying, car condition options */}
       {buyOrLease === "UN ACHAT" && !newOrUsed && (
         <>
           <>
@@ -85,6 +90,7 @@ const Form = () => {
           </>
         </>
       )}
+      {/* displays if leasing, rent time options */}
       {buyOrLease === "UN LEASING" && !leasingDuration && (
         <>
           <>
@@ -108,6 +114,7 @@ const Form = () => {
           </>
         </>
       )}
+      {/* display input contact details */}
       {((buyOrLease === "UN ACHAT" && newOrUsed && !submitted) ||
         (buyOrLease === "UN LEASING" && leasingDuration && !submitted)) && (
         <>
@@ -121,6 +128,7 @@ const Form = () => {
           />
         </>
       )}
+      {/* display modal */}
       {showmodal &&
         !submitted &&
         createPortal(
@@ -133,6 +141,7 @@ const Form = () => {
           />,
           document.body
         )}
+      {/* display success message  */}
       {submitted && <SubmittedText />}
     </section>
   );
